@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from "./logo.svg";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import "./App.css";
+// import Switch from "react-switch";
+// import Home from "./components/home";
+// import Hello from "./components/hello";
+import Loadable from "react-loadable";
 
 function App() {
+  const Home = Loadable({
+    loader: () => import("./components/home"),
+    loading() {
+      return <div>Loading...</div>;
+    },
+  });
+
+  const Hello = Loadable({
+    loader: () => import("./components/hello"),
+    loading() {
+      return <div>Loading...</div>;
+    },
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello</h1>
+      <BrowserRouter>
+        <Link to="/">Home</Link>
+        <Link to="/hello">Hello</Link>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/hello" element={<Hello />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
