@@ -1,13 +1,11 @@
-// import logo from "./logo.svg";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-// import Switch from "react-switch";
-// import Home from "./components/home";
-// import Hello from "./components/hello";
 import Loadable from "react-loadable";
 
 function App() {
+  //using Loadable for loading a commponent only when it is called
   const Home = Loadable({
+    //import is used to call the specific comp
     loader: () => import("./components/home"),
     loading() {
       return <div>Loading...</div>;
